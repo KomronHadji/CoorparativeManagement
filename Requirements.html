@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Buyers' Cooperative management</title>
+<link href=".css.css" rel="stylesheet" type="text/css">
+
+<style>
+@media print {  /* adjusted to print the html to a single-page pdf */
+body {
+	font-size: 10pt;
+}
+</style>
+
+</head>
+<body>
+
+
+<h1>Buyers' Cooperative management</h1>
+<p>
+
+Write a program to manage cooperative societies.
+Classes are located in the <b>cooperativeMgmt</b> package; 
+the main class is <b>Cooperative</b>. 
+The <b>Example</b> class in the <b>main</b> package provides usage examples for the main methods,
+and examples of the requested checks. Only implement the requested checks.
+Exceptions thrown by the following methods are of <b>CMException</b> type.<br>
+
+<p>
+The <a href="https://oop.polito.it/api/" rel="noopener" target="api" target="_blank" target="_blank">JDK documentation</a> is available on the local server.
+</p>
+
+<h2>R1: Members, product and purchase campaigns</h2>
+
+The <b> List&lt;String&gt; addMembers(String... names) method </b> adds members, given their names. If a name is present more than one time in the current list, or if it has been already inserted in a previous call to the method, it must be ignored. The method returns the ordered list of the inserted names. <br>
+
+The <b> List&lt;String&gt; addProducts(String... items) </b> method adds products and their prices. An item is constituted by a product's id and its price (int), separated by a ":" without spaces.
+The method returns the ordered list of the products' id. <br>
+
+The <b> List&lt;String&gt; addCampaign(String campaignId, String... productIds) </b> method adds the purchase campaigns. The first parameter is the campaign's id, while the second is a listing of the ids of products belonging to the campaign. If an id does not correspond to any product the method must fail throwing an exception. The method returns the ordered list of the products' ids. <br>
+
+<h2>R2: Campaigns enrolling and payments</h2>
+
+The <b> int join(String memberName, String campaignId) </b> method enrols a member for a purchase campaign. The method throws an exception if a member with the given name or a campaign with the given id have not been defined before. The method returns the number of campaigns in which the member has been enrolled.
+<br>
+
+The <b> int addPayment(String memberName, int amount) </b> method records a member's payment. The amount is an int. The method throws an exception if a member with the given name has not been defined before. The method returns the total amount of payments made by the member, including the current payment.
+<br>
+
+The <b> List&lt;String&gt; getPayments(String memberName) </b> method returns the list of payments' amounts; the list must be ordered following the same order as the payments were made. The method throws an exception if a member with the given name has not been defined before.
+<br>
+
+<h2>R3: Orders and balance</h2>
+
+Members can add orders to campaigns to which they are enrolled. A order contains a listing of products, with the number of requests for each product. The order's amount consists of the sum of each product price multiplied by the number of requests for that product. The member's balance is evaluated as the difference between the sum of the amounts of payments and the sum of the amounts of orders made by the member.
+<br>
+The <b> int getBalance (String memberName) </b> method returns the balance of the member with the given name. 
+<br>
+The <b> int addOrder(String orderId, String memberName, String campaignId, String... items) </b> 
+method adds a member's order to a campaign. The order includes a listing of items.
+An item is constituted by a product's id and the number of requests for that product, separated by a ":" without spaces. 
+The method throws an exception if the member is not enrolled to the campaign, or if a product is not included in the campaign, or also if the member's balance before the order's execution is below the order's amount. The method returns the order's amount. 
+<br>
+
+<h2>R4: Statistics</h2>
+
+The <b> SortedMap&lt;String, Integer&gt; nOfUnitsPerProductFromOrders() </b> method, starting from the inserted orders, returns the total amount of units requested by product's id, with the returned <b>SortedMap</b> ordered by the products' ids.
+<br>
+
+The <b> SortedMap&lt;String, Integer&gt; amountPerMember() </b> 
+returns the total amount of orders by member, with the returned <b>SortedMap</b> ordered by members' names. Only members with a total amount of orders >0 are included in the result.
+<br>
+
+
+
+</body>
+</html>

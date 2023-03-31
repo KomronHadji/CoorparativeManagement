@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+
+
+<title>Gestione di cooperative</title>
+<link href=".css.css" rel="stylesheet" type="text/css">
+<style>
+@media print {  /* adjusted to print the html to a single-page pdf */
+body {
+	font-size: 10pt;
+}
+</style>
+</head>
+<body>
+
+
+<h1>Gestione di cooperative</h1>
+<p>
+
+Si scriva un programma per la gestione di cooperative. 
+Le classi si trovano nel package <b>cooperativeMgmt</b>; 
+la classe principale è <b>Cooperative</b>. 
+La classe <b>Example</b> nel package <b>main</b> presenta esempi di uso dei metodi principali 
+ed esempi dei controlli richiesti. Si implementino soltanto i controlli richiesti.
+Le eccezioni sono di tipo <b>CMException</b>.<br>
+
+<p>
+La <a href="https://oop.polito.it/api/" target="api" target="_blank">JDK documentation</a>  
+si trova sul server locale.
+</p>
+
+<h2>R1: Soci, prodotti e campagne d'acquisto</h2>
+
+Il metodo <b> List &lt;String&gt; addMembers(String... names) </b> aggiunge i soci dati i loro nomi. Se un nome compare più volte nella lista corrente o è già stato inserito in una chiamata precedente, è ignorato. Il risultato è la lista ordinata dei nomi inseriti. <br>
+
+Il metodo <b> List &lt;String&gt; addProducts(String... items) </b> aggiunge prodotti e prezzi. Un item è costituito dall'id di un prodotto e dal suo prezzo (int) separati da ":"; non ci sono spazi.
+Il risultato è la lista ordinata degli id dei prodotti. <br>
+
+Il metodo <b> List &lt;String&gt; addCampaign(String campaignId, String... productIds) </b> aggiunge campagne d'acquisto. Il primo parametro è l'id della campagna e il secondo è l'elenco degli id dei prodotti che ne fanno parte. Se un id non corrisponde ad alcun prodotto il metodo fallisce lanciando un'eccezione. Il risultato è la lista ordinata degli id dei prodotti. <br>
+
+<h2>R2: Partecipazioni e pagamenti</h2>
+
+<p>I soci posso aderire a delle campagne e fare dei versamenti su un conto personale, 
+dal quale pagare gli acquisti fatti sulle campagne cui si sono iscritti.
+
+Il metodo <b> int join (String memberName, String campaignId) </b> iscrive un socio ad una campagna d'acquisto. Lancia un'eccezione se il socio o la campagna non sono stati definiti. Il risultato è il  numero di campagne alle quali il socio risulta iscritto.
+<br>
+
+Il metodo <b> int addPayment (String memberName, int amount) </b> registra il pagamento di un socio che versa un data importo sul conto personale. 
+L'importo (amount) è un int. Lancia un'eccezione se il socio non è stato definito. Il risultato è il totale dei pagamenti effettuati dal socio compreso quello corrente.
+<br>
+
+Il metodo <b> List &lt;String&gt; getPayments(String memberName) </b> dà la lista degli importi versati dal socio in ordine di versamento. Lancia un'eccezione se il socio non è stato definito. 
+<br>
+
+<h2>R3: Ordini e saldi</h2>
+
+I soci possono aggiungere ordini alle campagne alle quali sono iscritti. Un ordine contiene un elenco di prodotti con il numero di unità richieste per ciascun prodotto. L'importo dell'ordine risulta dalla somma dei prezzi dei prodotti moltiplicati per il numero di unità richieste. 
+Il saldo di un socio è dato dalla differenza tra la somma dei pagamenti e la somma degli importi degli ordini che ha effettuato.
+<br>
+Il metodo <b> int getBalance (String memberName) </b> dà il saldo del socio. 
+<br>
+Il metodo <b> int addOrder(String orderId, String memberName, String campaignId, String... items) </b> 
+aggiunge l'ordine di un socio per una campagna. L'ordine include una lista di items. 
+Un item è costituito dall'id di un prodotto e dal numero (int) di unità richieste separati da ":"; non ci sono spazi. 
+Lancia un'eccezione se il socio non è iscritto alla campagna, un prodotto non è incluso nella campagna o se il saldo prima dell'esecuzione dell'ordine 
+è inferiore alla metà dell'importo dell'ordine. Il risultato è l'importo dell'ordine. 
+<br>
+
+<h2>R4: Statistiche</h2>
+
+Il metodo <b> SortedMap &lt;String, Integer&gt; nOfUnitsPerProductFromOrders() </b> 
+dà il numero totale di unità richieste per id di prodotto con gli id dei prodotti ordinati, a partire dagli ordini inseriti. 
+<br>
+
+Il metodo <b> SortedMap &lt;String, Integer&gt; amountPerMember() </b> 
+dà l'importo totale degli ordini per socio, con i soci ordinati. Sono considerati soltanto i soci con importo totale > 0.
+<br>
+
+
+
+</body>
+</html>
